@@ -24,10 +24,12 @@ export const forecastSchema = z.object({
           icon: z.string(),
         })
       ),
+      formattedTime: z.string().optional(),
       wind: z.object({
         speed: z.number(),
         deg: z.number(),
       }),
+
       dt_txt: z.string(), // Date and time in text format
     })
   ),

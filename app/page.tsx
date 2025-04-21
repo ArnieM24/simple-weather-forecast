@@ -39,6 +39,8 @@ export default function Home() {
     const city = formData.get("city") as string;
     const { data, error: weatherError } = await getWeatherData(city);
 
+    console.log(data);
+
     if (weatherError) {
       setError(weatherError);
     } else if (data) {
@@ -59,8 +61,8 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-sky-400 to-blue-500 p-4 flex items-center justify-center">
-      <div className="w-full max-w-md space-y-4">
+    <div className="min-h-screen bg-gradient-to-b from-sky-400 to-blue-500 p-4 flex items-center justify-center max-sm:flex-col max-md:flex-col max-lg:flex-col">
+      <div className="w-full max-w-md space-y-4 md:max-sm:flex">
         <div className="flex items-center justify-center mb-4 ">
           <Image
             src={Logo}
@@ -196,21 +198,25 @@ export default function Home() {
         )}
       </div>
       {forecast && (
-        <div className="mt-6">
+        <div className="mt-6 max-md:mt-6">
           {/* Add a centered label */}
           <h2 className="text-2xl font-bold text-center text-white mb-4">
             6 Day Forecast
           </h2>
-          <div className="ml-10 grid grid-cols-3 gap-4">
+          <div className="ml-10 grid grid-cols-3 gap-4 max-md:ml-0 max-sm:ml-0 max-lg:ml-0">
             {Object.entries(forecast)
               .slice(0, 6) // Limit to 6 cards
-              .map(([date, dayData]) => (
+              .map(([date, dayData], index) => (
                 <Card key={date} className="bg-white/50 backdrop-blur">
                   <CardContent className="p-2">
-                    <h3 className="text-xl font-bold text-center">
-                      {new Date(date).toDateString()}
+                    <h3 className="text-xl font-bold text-center max-md:text-[16px] max-sm:text-[12px]">
+                      {index === 0
+                        ? "Today"
+                        : new Date(date).toLocaleDateString("en-US", {
+                            weekday: "long",
+                          })}
                     </h3>
-                    <div className="grid grid-cols-3">
+                    <div className="grid grid-cols-3 max-sm:grid-cols-2">
                       {dayData.map((item) => (
                         <div key={item.dt} className="text-center">
                           <img
@@ -218,16 +224,16 @@ export default function Home() {
                             alt={item.weather[0].description}
                             width={50}
                             height={50}
-                            className="justify-center mx-auto"
+                            className="justify-center mx-auto max-md:text-sm"
                           />
-                          <div className="text-sm font-semibold">
+                          <div className="text-sm font-semibold max-md:text-[12px] sm:text-[12px]">
                             {Math.round(item.main.temp)}°C
                           </div>
-                          <div className="text-xs text-gray-600 capitalize">
+                          <div className="text-xs text-gray-600 capitalize sm:text-[10px] max-sm:text-[8px]">
                             {item.weather[0].description}
                           </div>
-                          <div className="text-xs text-gray-600">
-                            {item.dt_txt.split(" ")[1]}
+                          <div className="text-xs text-gray-600 sm:text-[10px] max-sm:text-[8px]">
+                            {item.formattedTime}
                           </div>
                         </div>
                       ))}

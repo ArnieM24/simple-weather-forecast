@@ -18,6 +18,7 @@ export const weatherSchema = z.object({
       icon: z.string(),
     })
   ),
+  dt: z.number(),
   wind: z.object({
     speed: z.number(),
     deg: z.number(),

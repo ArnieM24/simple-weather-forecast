@@ -17,11 +17,9 @@ export const metadata: Metadata = {
   description: "A Simple Weather Forecast App Using OpenWeather API",
   icons: {
     icon: {
-      url: "/LandingPage-Icon.png",
+      url: "/favicon.ico",
       type: "image/png",
     },
-    shortcut: "/favicon.ico",
-    apple: "/apple-touch-icon.png",
   },
 };
 
@@ -32,6 +30,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <link rel="icon" href="/favicon.ico" />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >

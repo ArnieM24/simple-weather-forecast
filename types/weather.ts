@@ -14,6 +14,7 @@ export interface WeatherData {
     description: string;
     icon: string;
   }>;
+  dt: number;
   wind: {
     speed: number;
     deg: number;
@@ -46,5 +47,6 @@ export interface ForecastData {
       deg: number;
     };
     dt_txt: string; // Date and time in text format
+    formattedTime?: string;
   }>;
 }
