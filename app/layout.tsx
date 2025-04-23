@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   description: "A Simple Weather Forecast App Using OpenWeather API",
   icons: {
     icon: {
-      url: "/favicon.ico",
+      url: "/Logo.png",
       type: "image/png",
     },
   },
